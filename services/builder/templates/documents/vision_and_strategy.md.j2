@@ -1,0 +1,11 @@
+# {{ title }}
+
+{% if generated %}
+{{ generated }}
+{% elif facts %}
+{% for fact in facts %}
+- **{{ fact.id }}: {{ fact.title }}** (достоверность {{ fact.confidence }}, источник: {{ fact.doc }}, фрагмент {{ fact.frag }})
+{% endfor %}
+{% else %}
+_({{ empty_reason }})_
+{% endif %}
