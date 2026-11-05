@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}ReQminer{% endblock %}</title>
+<link rel="stylesheet" href="/static/styles.css">
+<script src="/static/vendor/htmx.min.js" defer></script>
+<script src="/static/app.js" defer></script>
+{% block head %}{% endblock %}
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="brand" href="/packages">ReQminer</a>
+  <a href="/packages" {% if nav == 'packages' %}class="active"{% endif %}>Пакеты</a>
+  <a href="/facts" {% if nav == 'facts' %}class="active"{% endif %}>Факты</a>
+  <a href="/review" {% if nav == 'review' %}class="active"{% endif %}>Противоречия</a>
+  <a href="/graph" {% if nav == 'graph' %}class="active"{% endif %}>Граф</a>
+  <a href="/report" {% if nav == 'report' %}class="active"{% endif %}>Отчёты</a>
+  <span class="spacer"></span>
+  <span class="run-slot" hx-get="/run-pill" hx-trigger="load, every 5s"
+        hx-swap="innerHTML"></span>
+  <span class="user">{{ user }}</span>
+  <a class="exit" href="#" onclick="return false;">Выйти</a>
+</nav>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<div id="toast" class="toast"></div>
+
+</body>
+</html>

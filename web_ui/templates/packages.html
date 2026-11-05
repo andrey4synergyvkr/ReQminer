@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}ReQminer — Реестр пакетов{% endblock %}
+{% block content %}
+<div class="page-head with-action">
+  <h1>Реестр пакетов</h1>
+  <a href="/packages/new"><button class="primary">＋ Загрузить</button></a>
+</div>
+
+<form class="filters" method="get" action="/packages">
+  <label for="f-dir">Направление:</label>
+  <select id="f-dir" name="direction">
+    <option {% if f_direction == 'все' %}selected{% endif %}>все</option>
+    {% for d in directions %}
+    <option {% if f_direction == d %}selected{% endif %}>{{ d }}</option>
+    {% endfor %}
+  </select>
+  <label for="f-status">Статус:</label>
+  <select id="f-status" name="status">
+    <option {% if f_status == 'все' %}selected{% endif %}>все</option>
+    {% for s, label in package_status_labels.items() %}
+    <option value="{{ s }}" {% if f_status == s %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <label for="f-search">Поиск:</label>
+  <input type="search" id="f-search" name="q" value="{{ f_q }}" placeholder="обращение...">
+  <button type="submit">Применить</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th class="num"></th>
+      <th>Пакет</th>
+      <th class="num">Документов</th>
+      <th>Статус</th>
+      <th class="num">Фактов</th>
+      <th class="date">Последний прогон</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in rows %}
+    <tr data-pkg="{{ p.id }}">
+      <td class="num"><input type="checkbox" {% if loop.first %}checked{% endif %}></td>
+      <td class="pkg">{{ p.name }}</td>
+      <td class="num">{{ p.documents }}</td>
+      <td><span class="badge {{ adapter.package_status_css(p) }}">{{ adapter.package_status_label(p) }}</span></td>
+      <td class="num">{{ p.facts if p.facts is not none else '—' }}</td>
+      <td class="date">{{ p.last_run }}</td>
+    </tr>
+    {% endfor %}
+    {% if not rows %}
+    <tr><td colspan="6" class="hint">Пакеты не найдены</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+
+<div class="foot">
+  <button id="btn-open">Открыть</button>
+  <button id="btn-analyze">Анализ</button>
+  <span class="total">Всего пакетов: {{ rows|length }}</span>
+</div>
+{% endblock %}

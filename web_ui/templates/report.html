@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}ReQminer — Результаты прогона{% endblock %}
+{% block content %}
+{% if not data %}
+<div class="page-head">
+  <h1>Результаты прогона</h1>
+  {% if packages %}
+  <select onchange="location = '?package=' + this.value">
+    {% for p in packages %}
+    <option value="{{ p.id }}" {% if p.id == package %}selected{% endif %}>{{ p.id }} — {{ p.name }}</option>
+    {% endfor %}
+  </select>
+  {% endif %}
+</div>
+<div class="flash">Для пакета {{ package }} каркас ещё не сформирован: прогон не завершен или пакет отклонен. Смотрите <a href="/packages">реестр пакетов</a>.</div>
+{% else %}
+<div class="page-head">
+  <h1>Результаты прогона</h1>
+  {% if packages %}
+  <select onchange="location = '?package=' + this.value">
+    {% for p in packages %}
+    <option value="{{ p.id }}" {% if p.id == package %}selected{% endif %}>{{ p.id }} — {{ p.name }}</option>
+    {% endfor %}
+  </select>
+  {% endif %}
+</div>
+<p class="run-state">Пакет <b>{{ data.package.name }}</b> — прогон завершен {{ data.finished }}</p>
+<span id="report-package" data-package="{{ package }}" hidden></span>
+
+<div class="section">
+  <h2>Каркас технической документации <span class="dir">· каталог outbox</span></h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Раздел каркаса</th>
+        <th>Файл</th>
+        <th class="num">Включено фактов</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in data.sections %}
+      <tr>
+        <td>{{ s.title }}</td>
+        <td class="file">{{ s.file }}</td>
+        <td class="num">{{ s.facts }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="actions">
+    <button class="primary" id="btn-preview">Просмотр</button>
+    <button id="btn-export-md">Экспорт в markdown</button>
+    <button id="btn-export-docx">Экспорт в docx</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Аналитический отчет</h2>
+  <div class="metrics">
+    <div class="metric"><div class="v">{{ data.metrics.documents }}</div><div class="k">документа</div></div>
+    <div class="metric"><div class="v">{{ data.metrics.fragments }}</div><div class="k">фрагмента</div></div>
+    <div class="metric"><div class="v">{{ data.metrics.facts }}</div><div class="k">фактов</div></div>
+    <div class="metric"><div class="v">{{ data.metrics.confirmed }}</div><div class="k">подтверждено аналитиком</div></div>
+    <div class="metric"><div class="v">{{ data.metrics.pending }}</div><div class="k">ожидает подтверждения</div></div>
+    <div class="metric"><div class="v">{{ data.metrics.pairs_contradiction }}</div><div class="k">пара противоречий</div></div>
+    <div class="metric"><div class="v">{{ data.metrics.pairs_duplicate }}</div><div class="k">пара дубликатов</div></div>
+    <div class="metric"><div class="v">{{ data.metrics.quarantine }}</div><div class="k">карантин</div></div>
+  </div>
+  <div class="gaps">{{ data.gaps }}</div>
+  <div class="actions">
+    <button class="primary" id="btn-download-report">Скачать отчет</button>
+    <button onclick="location='/packages/{{ data.package.id }}/run'">К пакету</button>
+  </div>
+</div>
+
+<dialog class="preview-dialog" id="preview-dialog">
+  <div class="dlg-head"><span class="dlg-title">Предпросмотр</span><button onclick="this.closest('dialog').close()">✕</button></div>
+  <div class="dlg-body doc-preview"></div>
+</dialog>
+{% endif %}
+{% endblock %}

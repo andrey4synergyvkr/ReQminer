@@ -1,0 +1,6 @@
+{% if pill %}
+<a class="run-pill" href="/packages/{{ pill.id }}/run"
+   title="Активный прогон: {{ pill.name }} ({{ pill.phase }})">
+  <span class="pulse"></span>{% if pill.count > 1 %}{{ pill.count }} прогона{% else %}Прогон {{ pill.id }}{% endif %} · {{ pill.percent }} %
+</a>
+{% endif %}
