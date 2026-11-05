@@ -1,0 +1,22 @@
+# Аналитический отчет — пакет {{ package }}
+
+_Сформирован {{ generated }}_
+
+| Метрика | Значение |
+|---------|----------|
+| документов | {{ metrics.get('documents', 0) }} |
+| фрагментов | {{ metrics.get('fragments', 0) }} |
+| фактов | {{ metrics.get('facts', 0) }} |
+| подтверждено аналитиком | {{ metrics.get('confirmed', 0) }} |
+| ожидает подтверждения | {{ metrics.get('pending', 0) }} |
+| пара противоречий | {{ metrics.get('pairs_contradiction', 0) }} |
+| пара дубликатов | {{ metrics.get('pairs_duplicate', 0) }} |
+| карантин | {{ metrics.get('quarantine', 0) }} |
+{% if gaps %}
+
+**Пробелы модели:** {{ gaps }}
+{% endif %}
+{% if prompt_version %}
+
+_Промпты LLM: версия {{ prompt_version }}_
+{% endif %}

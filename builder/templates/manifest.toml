@@ -1,0 +1,76 @@
+# Каталог документов каркаса технической документации.
+#
+# Каждый документ присутствует в каркасе всегда: раздел без фактов получает заглушку с причиной empty_reason.
+# Структура и разметка живут в Jinja-шаблонах documents/, промпты генерации разделов — в prompts/.
+
+[[documents]]
+id = "vision"
+path = "vision_and_strategy.md"
+title = "Видение и стратегия"
+group = "Видение и стратегия"
+type = "vision"
+template = "documents/vision_and_strategy.md.j2"
+empty_reason = "раздел пуст: факты типа Vision не извлечены"
+
+[[documents]]
+id = "glossary"
+path = "glossary.md"
+title = "Глоссарий"
+group = "Глоссарий"
+type = "term"
+template = "documents/glossary.md.j2"
+empty_reason = "раздел пуст: термины не извлечены"
+
+[[documents]]
+id = "epics"
+path = "functional_reqs/epics.md"
+title = "Эпики"
+group = "Функциональные требования"
+type = "epic"
+template = "documents/functional_reqs/epics.md.j2"
+empty_reason = "эпики не извлечены"
+
+[[documents]]
+id = "features"
+path = "functional_reqs/features.md"
+title = "Фичи"
+group = "Функциональные требования"
+type = "feature"
+template = "documents/functional_reqs/features.md.j2"
+empty_reason = "фичи не извлечены"
+
+[[documents]]
+id = "user_stories"
+path = "functional_reqs/user_stories.md"
+title = "Пользовательские истории"
+group = "Функциональные требования"
+type = "us"
+template = "documents/functional_reqs/user_stories.md.j2"
+empty_reason = "истории не извлечены"
+
+[[documents]]
+id = "quality_goals"
+path = "non_functional_reqs/quality_goals.md"
+title = "Цели качества (NFR)"
+group = "Нефункциональные требования"
+type = "nfr"
+template = "documents/non_functional_reqs/quality_goals.md.j2"
+empty_reason = "цели качества не извлечены"
+
+[[documents]]
+id = "constraints"
+path = "constraints.md"
+title = "Ограничения"
+group = "Ограничения"
+type = "constraint"
+template = "documents/constraints.md.j2"
+empty_reason = "ограничения не извлечены"
+
+[[documents]]
+id = "analysis_report"
+path = "analysis_report.md"
+title = "Аналитический отчет"
+group = "Отчёт"
+template = "documents/analysis_report.md.j2"
+renderer = "report"
+in_outbox_sections = false
