@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}ReQminer — Список извлечённых фактов{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Список извлечённых фактов</h1>
+  {% if packages %}
+  <select onchange="location = '?package=' + this.value">
+    {% for p in packages %}
+    <option value="{{ p.id }}" {% if p.id == package %}selected{% endif %}>{{ p.id }} — {{ p.name }}</option>
+    {% endfor %}
+  </select>
+  {% endif %}
+</div>
+<p class="run-state">Пакет <b>{{ pkg.name }}</b> ({{ pkg.documents }} документа) — прогон завершен {{ pkg.last_run }}</p>
+
+<form class="filters" method="get" action="/facts">
+  <input type="hidden" name="package" value="{{ pkg.id }}">
+  <label for="f-type">Тип факта:</label>
+  <select id="f-type" name="type">
+    <option value="все" {% if f_type == 'все' %}selected{% endif %}>все типы</option>
+    {% for t in fact_types %}
+    <option value="{{ t.key }}" {% if f_type == t.key %}selected{% endif %}>{{ t.label }}</option>
+    {% endfor %}
+  </select>
+  <label for="f-status">Статус:</label>
+  <select id="f-status" name="status">
+    <option value="все" {% if f_status == 'все' %}selected{% endif %}>все статусы</option>
+    {% for s, label in fact_status_labels.items() %}
+    <option value="{{ s }}" {% if f_status == s %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <label for="f-conf">Достоверность от:</label>
+  <input type="text" id="f-conf" name="min_conf" value="{{ f_min_conf }}" size="5">
+  <label for="f-search">Поиск по тексту:</label>
+  <input type="search" id="f-search" name="q" value="{{ f_q }}" placeholder="формулировка...">
+  <button type="submit">Применить</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Тип</th>
+      <th>Формулировка</th>
+      <th>Достоверность</th>
+      <th>Статус</th>
+      <th>Источник</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for f in rows %}
+    <tr>
+      <td><span class="tag {{ f.type }}">{{ adapter.fact_type_label(f.type) }}</span></td>
+      <td>{{ f.title }}</td>
+      <td>{{ '%.2f'|format(f.confidence) }}</td>
+      <td><span class="badge {{ fact_status_css[f.status] }}">{{ fact_status_labels[f.status] }}</span></td>
+      <td class="src"><a href="#" onclick="openFragment('{{ f.id }}', '{{ pkg.id }}'); return false;">{{ adapter.fact_source_label(f) }}</a></td>
+    </tr>
+    {% endfor %}
+    {% if not rows %}
+    <tr><td colspan="5" class="hint">Факты не найдены — измените фильтры</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+
+<div class="foot">
+  <a href="/review?package={{ package }}"><button>К подтверждению ({{ pending_count }})</button></a>
+  <span class="total">Всего фактов: {{ total }}, показано: {{ rows|length }}</span>
+</div>
+
+<dialog class="source-dialog" id="fragment-dialog">
+  <div class="dlg-head"><span class="dlg-title">Фрагмент-источник</span><button onclick="this.closest('dialog').close()">✕</button></div>
+  <div class="dlg-body"></div>
+</dialog>
+{% endblock %}

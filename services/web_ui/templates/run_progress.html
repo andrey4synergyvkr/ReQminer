@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}ReQminer — Прогресс прогона{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1 class="h1-mb">Прогресс прогона — {{ pkg.name }}</h1>
+</div>
+
+{% include "_run_panel.html" %}
+
+<div class="foot">
+  <button onclick="location='/packages/{{ pkg.id }}/run'">Обновить</button>
+  <button onclick="location='/facts?package={{ pkg.id }}'">Перейти к фактам</button>
+</div>
+{% endblock %}
