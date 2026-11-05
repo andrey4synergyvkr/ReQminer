@@ -1,0 +1,122 @@
+@startuml
+hide circle
+hide empty method
+hide empty attribute
+'------------------------------------------------------------------
+
+skinparam {
+    shadowing false
+}
+
+skinparam class<<abstract>> {
+    backgroundColor #White
+}
+
+skinparam class<<enum>> {
+    backgroundColor #LightCyan
+}
+
+skinparam class<<reference>> {
+    backgroundColor %darken(LightYellow, 8)
+}
+
+skinparam class<<util>> {
+    backgroundColor #Azure
+}
+
+skinparam class<<concept>> {
+    backgroundColor #Motivation
+}
+
+skinparam class {
+    backgroundColor #LightYellow
+}
+
+'------------------------------------------------------------------
+
+'' Макрос для вставки описания классов.
+!define s(x) <size:10><color:grey><i>x</i></color></size>
+
+'------------------------------------------------------------------
+
+'' Инициализирует PUML-диаграмму.
+!procedure Diagram($caption, $footer="", $width=100, $height=100, $min=100, $max=110, $arrowTextMax=120)
+
+    caption
+    $caption
+    end caption
+
+    footer
+    $footer
+    end footer
+
+    skinparam wrapMessageWidth $arrowTextMax
+
+    Spacing($width, $height)
+    Size($min, $max)
+
+!endprocedure
+
+'------------------------------------------------------------------
+
+'' Устанавливает относительные длины связей
+'' и интервалы между элементами диаграмм.
+!procedure Spacing($width=100, $height=80)
+    skinparam {
+        nodesep $width
+        ranksep $height
+    }
+!endprocedure
+
+'------------------------------------------------------------------
+
+'' Устанавливает минимальные и максимальные размеры элементов диаграмм.
+!procedure Size($min=100, $max=150)
+    <style>
+        class {
+          MinimumWidth $min
+          MaximumWidth $max
+        }
+
+        package {
+          backgroundColor transparent
+          MinimumWidth $min
+          MaximumWidth $max
+        }
+    </style>
+
+    skinparam PackageBorderColor silver
+
+!endprocedure
+
+!unquoted procedure Entity($alias, $label="", $description="", $abstract=%false(), $tags="")
+    !if $label == ""
+        !$label = $alias
+    !endif
+
+    !if $abstract == %true()
+        !$stereotypes = "<<abstract>>"
+    !endif
+
+    !if $tags != ""
+        !foreach $tag in %splitstr($tags, ",")
+            !$stereotypes = $stereotypes + "<<" + $tag + ">>"
+        !endfor
+    !endif
+
+    class "$label" as $alias $stereotypes {
+        !if $description != ""
+        s($description)
+        !endif
+    }
+
+!endprocedure
+
+!unquoted procedure Generalization($from, $to)
+    $from -up-|> $to
+!endprocedure
+
+!unquoted procedure Association($from, $to, $label="", $from_mult="", $to_mult="", $undirect=%false())
+    $from --> $to
+!endprocedure
+@enduml

@@ -1,0 +1,144 @@
+@startuml
+!include ../tools/dsl.puml
+
+''----------------------------------------------------------------------------------------------------------------------
+'' Сущности
+''----------------------------------------------------------------------------------------------------------------------
+class Link <<abstract>> {
+    s("Абстрактная связь между требованиями")
+}
+
+class Requirement <<abstract>> {
+    s("Абстрактная сущность для любого требования/записи бэклога.")
+}
+
+class FunctionalReq <<abstract>> {
+    s("Абстрактное функциональное требование")
+}
+
+class NonFunctionalReq <<abstract>> {
+    s("Абстрактное требование к качеству, ограничению или техническому свойству")
+}
+
+class Criterion <<abstract>> {
+    s("Абстрактный критерий соответствия ожиданию")
+}
+
+class Dependency {
+    s("Зависимость планирования или реализации между требованиями")
+}
+
+class TraceabilityLink {
+    s("Трассируемая связь происхождения, реализации или проверки")
+}
+
+class Risk {
+    s("Риск, влияющий на требования, качество или поставку")
+}
+
+class DefinitionOfDone {
+    s("Набор критериев готовности")
+}
+
+class Epic {
+    s("Крупная функциональная цель или большая область работ")
+}
+
+class AcceptanceCriterion {
+    s("Критерий приема конкретного требования")
+}
+
+class DoneCriterion {
+    s("Конкретный пункт Definition of Done")
+}
+
+class QualityGoal {
+    s("Описывает измеримую цель качества системы")
+}
+
+class TechnicalStory {
+    s("Техническая история, которая обычно не является пользовательской ценностью напрямую, но нужна для достижения целей качества")
+}
+
+class Feature {
+    s("Функциональность, детализирующая Epic")
+}
+
+class QualityAttribute {
+    s("Конкретный атрибут качества по выбранной модели качества")
+}
+
+class UserStory {
+    s("Пользовательская история с ценностью для пользователя")
+}
+
+class QualityAttrType <<enum>> {
+    s("Справочник категорий атрибутов модели качества")
+}
+
+class DependencyType <<enum>> {
+    s("Тип зависимости между требованиями")
+}
+
+class TraceabilityType <<enum>> {
+    s("Трассируемая связь происхождения, реализации или проверки")
+}
+
+class ConfidenceAssessment {
+    s("Оценка точности")
+}
+
+''----------------------------------------------------------------------------------------------------------------------
+'' Наследование
+''----------------------------------------------------------------------------------------------------------------------
+FunctionalReq -u-|> Requirement
+NonFunctionalReq -u-|> Requirement
+
+Epic -u-|> FunctionalReq
+Feature -u-|> FunctionalReq
+UserStory -u-|> FunctionalReq
+
+QualityGoal -u-|> NonFunctionalReq
+TechnicalStory -u-|> NonFunctionalReq
+
+Dependency --|> Link
+TraceabilityLink --|> Link
+
+DoneCriterion --|> Criterion
+AcceptanceCriterion --|> Criterion
+
+''----------------------------------------------------------------------------------------------------------------------
+'' Агрегации и композиции
+''----------------------------------------------------------------------------------------------------------------------
+Epic "0..1" o-r- "*" Feature : "groups"
+Feature "0..1" o-r- "*" UserStory: "decomposesInto"
+Requirement "1" *-- "*" AcceptanceCriterion :  "has"
+DefinitionOfDone "1" *-- "1..*" DoneCriterion : "contains"
+Requirement "1" *-r- "0..1" ConfidenceAssessment : "assessment"
+''----------------------------------------------------------------------------------------------------------------------
+'' Ассоциации
+''----------------------------------------------------------------------------------------------------------------------
+Link "*" -d-> "1" Requirement : "source"
+Link "*" -d-> "1" Requirement : "target"
+
+Requirement "0..1" --> "*" DefinitionOfDone : "mustSatisfy"
+
+Dependency "*" -u-> "1" DependencyType : "type"
+TraceabilityLink "*" -u-> "1" TraceabilityType : "type"
+
+QualityGoal "*" -l- "*" TechnicalStory : "associate"
+QualityGoal "*" --> "1..*" QualityAttribute : "addresses"
+TechnicalStory "*" --> "1..*" QualityAttribute : "addresses"
+QualityAttribute "*" --> "1" QualityAttrType : "category"
+
+DefinitionOfDone "*" --> "*" QualityGoal : "requires"
+
+Risk "*" -r-> "*" Requirement : "affects"
+Risk "*" --> "*" QualityGoal : "threatens"
+Risk "*" --> "*" TechnicalStory : "mitigatedBy"
+
+''----------------------------------------------------------------------------------------------------------------------
+'' Настройки представления
+''----------------------------------------------------------------------------------------------------------------------
+Diagram("Онтологическая модель требований Scrum")
+@enduml

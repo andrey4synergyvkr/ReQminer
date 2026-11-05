@@ -1,0 +1,561 @@
+{
+  "package": "2026-042",
+  "metrics": {
+    "documents": 3,
+    "fragments": 52,
+    "quarantine": 1,
+    "facts": 48,
+    "confirmed": 0,
+    "pending": 38,
+    "pairs_contradiction": 1,
+    "pairs_duplicate": 13
+  },
+  "facts": [
+    {
+      "id": "F-001",
+      "type": "term",
+      "title": "Пакет документов",
+      "status": "pending_review",
+      "confidence": 0.95,
+      "doc": "tz.md",
+      "frag": 2
+    },
+    {
+      "id": "F-002",
+      "type": "epic",
+      "title": "Система должна обеспечивать интеграцию с корпоративной системой электронного документооборота (ЭДО).",
+      "status": "pending_review",
+      "confidence": 0.9,
+      "doc": "tz.md",
+      "frag": 3
+    },
+    {
+      "id": "F-003",
+      "type": "term",
+      "title": "Ключевая цель",
+      "status": "pending_review",
+      "confidence": 0.95,
+      "doc": "tz.md",
+      "frag": 4
+    },
+    {
+      "id": "F-004",
+      "type": "epic",
+      "title": "Ключевая цель — автоматизация приёма и обработки обращений заказчиков без ручной маршрутизации.",
+      "status": "pending_review",
+      "confidence": 0.9,
+      "doc": "tz.md",
+      "frag": 4
+    },
+    {
+      "id": "F-005",
+      "type": "feature",
+      "title": "Пакетный приём документов",
+      "status": "pending_review",
+      "confidence": 0.9,
+      "doc": "tz.md",
+      "frag": 5
+    },
+    {
+      "id": "F-006",
+      "type": "us",
+      "title": "Как аналитик, я хочу загружать пакет документов, чтобы не обрабатывать их по одному",
+      "status": "duplicate",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 6
+    },
+    {
+      "id": "F-007",
+      "type": "feature",
+      "title": "Экспорт результатов",
+      "status": "pending_review",
+      "confidence": 0.9,
+      "doc": "tz.md",
+      "frag": 7
+    },
+    {
+      "id": "F-008",
+      "type": "feature",
+      "title": "Валидация извлечённых данных",
+      "status": "pending_review",
+      "confidence": 0.9,
+      "doc": "tz.md",
+      "frag": 8
+    },
+    {
+      "id": "F-009",
+      "type": "constraint",
+      "title": "Срок внедрения системы — не позднее трёх месяцев с даты подписания договора.",
+      "status": "needs_clarification",
+      "confidence": 0.8,
+      "doc": "tz.md",
+      "frag": 9
+    },
+    {
+      "id": "F-010",
+      "type": "feature",
+      "title": "Уведомления о статусе обработки",
+      "status": "pending_review",
+      "confidence": 0.9,
+      "doc": "tz.md",
+      "frag": 11
+    },
+    {
+      "id": "F-011",
+      "type": "us",
+      "title": "Как оператор, я хочу видеть текущий статус обработки пакета в реальном времени",
+      "status": "duplicate",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 12
+    },
+    {
+      "id": "F-012",
+      "type": "us",
+      "title": "Как аналитик, я хочу подтверждать или отклонять извлечённые системой факты",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 13
+    },
+    {
+      "id": "F-013",
+      "type": "us",
+      "title": "Как администратор, я хочу вести справочник типов входящих документов",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 14
+    },
+    {
+      "id": "F-014",
+      "type": "us",
+      "title": "Как аналитик, я хочу фильтровать список фактов по типу, статусу и уровню достоверности",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 16
+    },
+    {
+      "id": "F-015",
+      "type": "us",
+      "title": "Как руководитель, я хочу получать сводный отчёт о ходе обработки обращений за период",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 17
+    },
+    {
+      "id": "F-016",
+      "type": "us",
+      "title": "Как оператор, я хочу загружать скан-копии бумажных документов",
+      "status": "duplicate",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 18
+    },
+    {
+      "id": "F-017",
+      "type": "us",
+      "title": "Как аналитик, я хочу видеть историю изменений каждого требования",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 19
+    },
+    {
+      "id": "F-018",
+      "type": "term",
+      "title": "Эпик",
+      "status": "pending_review",
+      "confidence": 0.95,
+      "doc": "tz.md",
+      "frag": 20
+    },
+    {
+      "id": "F-019",
+      "type": "vision",
+      "title": "Эпик — крупная функциональная цель, объединяющая несколько связанных функций системы.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 20
+    },
+    {
+      "id": "F-020",
+      "type": "us",
+      "title": "Как аналитик, я хочу сравнивать факты двух пакетов между собой",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 21
+    },
+    {
+      "id": "F-021",
+      "type": "us",
+      "title": "Как администратор, я хочу управлять правами доступа пользователей к разделам системы",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 22
+    },
+    {
+      "id": "F-022",
+      "type": "us",
+      "title": "Как оператор, я хочу получать уведомление о готовности итогового отчёта",
+      "status": "duplicate",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 23
+    },
+    {
+      "id": "F-023",
+      "type": "us",
+      "title": "Как аналитик, я хочу отклонять ошибочно извлечённые факты с указанием причины",
+      "status": "duplicate",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 24
+    },
+    {
+      "id": "F-024",
+      "type": "us",
+      "title": "Как руководитель, я хочу видеть статистику по всем обращениям за месяц",
+      "status": "duplicate",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 25
+    },
+    {
+      "id": "F-025",
+      "type": "nfr",
+      "title": "Время отклика интерфейса при типовых операциях не должно превышать двух секунд.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 26
+    },
+    {
+      "id": "F-026",
+      "type": "nfr",
+      "title": "Система должна поддерживать не менее 100 одновременных пользователей.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 27
+    },
+    {
+      "id": "F-027",
+      "type": "nfr",
+      "title": "Доступность системы в рабочее время — не менее 99,5%.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 28
+    },
+    {
+      "id": "F-028",
+      "type": "nfr",
+      "title": "Данные при передаче и хранении должны шифроваться по стандартам организации.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 29
+    },
+    {
+      "id": "F-029",
+      "type": "constraint",
+      "title": "В качестве СУБД допускается использование только отечественных решений из реестра Минцифры.",
+      "status": "pending_review",
+      "confidence": 0.8,
+      "doc": "tz.md",
+      "frag": 30
+    },
+    {
+      "id": "F-030",
+      "type": "constraint",
+      "title": "Развёртывание системы выполняется в закрытом контуре заказчика без доступа в сеть интернет.",
+      "status": "pending_review",
+      "confidence": 0.8,
+      "doc": "tz.md",
+      "frag": 31
+    },
+    {
+      "id": "F-031",
+      "type": "constraint",
+      "title": "Интеграция со смежными системами осуществляется только через REST API.",
+      "status": "pending_review",
+      "confidence": 0.8,
+      "doc": "tz.md",
+      "frag": 32
+    },
+    {
+      "id": "F-032",
+      "type": "constraint",
+      "title": "Обработка персональных данных должна соответствовать требованиям Федерального закона № 152-ФЗ.",
+      "status": "pending_review",
+      "confidence": 0.8,
+      "doc": "tz.md",
+      "frag": 33
+    },
+    {
+      "id": "F-033",
+      "type": "constraint",
+      "title": "Система должна работать под управлением операционных систем Windows и Linux.",
+      "status": "pending_review",
+      "confidence": 0.8,
+      "doc": "tz.md",
+      "frag": 34
+    },
+    {
+      "id": "F-034",
+      "type": "term",
+      "title": "Карантин",
+      "status": "pending_review",
+      "confidence": 0.95,
+      "doc": "tz.md",
+      "frag": 35
+    },
+    {
+      "id": "F-035",
+      "type": "term",
+      "title": "Прогон",
+      "status": "pending_review",
+      "confidence": 0.95,
+      "doc": "tz.md",
+      "frag": 36
+    },
+    {
+      "id": "F-036",
+      "type": "term",
+      "title": "Каркас документации",
+      "status": "pending_review",
+      "confidence": 0.95,
+      "doc": "tz.md",
+      "frag": 37
+    },
+    {
+      "id": "F-037",
+      "type": "vision",
+      "title": "Заказчик ожидает сокращения времени обработки обращений не менее чем в три раза.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 38
+    },
+    {
+      "id": "F-038",
+      "type": "term",
+      "title": "Стратегическая цель",
+      "status": "pending_review",
+      "confidence": 0.95,
+      "doc": "tz.md",
+      "frag": 39
+    },
+    {
+      "id": "F-039",
+      "type": "vision",
+      "title": "Стратегическая цель — единая точка приёма требований от всех заказчиков компании.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 39
+    },
+    {
+      "id": "F-040",
+      "type": "vision",
+      "title": "Каждое требование должно прослеживаться до фрагмента исходного документа (трассировка).",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 40
+    },
+    {
+      "id": "F-041",
+      "type": "vision",
+      "title": "Ожидается снижение трудозатрат аналитиков на подготовку документации не менее чем на 40%.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 41
+    },
+    {
+      "id": "F-042",
+      "type": "vision",
+      "title": "Повышение качества технической документации за счёт единых шаблонов и контроля полноты.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 42
+    },
+    {
+      "id": "F-043",
+      "type": "vision",
+      "title": "По итогам пилота планируется масштабирование системы на другие отделы компании.",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "tz.md",
+      "frag": 43
+    },
+    {
+      "id": "F-044",
+      "type": "feature",
+      "title": "экспорт результатов обработки в табличном формате для бизнес-аналитики",
+      "status": "duplicate",
+      "confidence": 0.9,
+      "doc": "feature_request.md",
+      "frag": 1
+    },
+    {
+      "id": "F-045",
+      "type": "us",
+      "title": "Как аналитик, я хочу экспортировать отчёт в формате XLSX, чтобы передавать данные в существующие процессы",
+      "status": "pending_review",
+      "confidence": 0.85,
+      "doc": "feature_request.md",
+      "frag": 2
+    },
+    {
+      "id": "F-046",
+      "type": "constraint",
+      "title": "По итогам обсуждения бюджет проекта не должен превысить 2 млн рублей.",
+      "status": "pending_review",
+      "confidence": 0.8,
+      "doc": "correspondence.md",
+      "frag": 1
+    },
+    {
+      "id": "F-047",
+      "type": "constraint",
+      "title": "Со стороны заказчика реалистичный срок внедрения — шесть месяцев, с учётом согласований.",
+      "status": "needs_clarification",
+      "confidence": 0.8,
+      "doc": "correspondence.md",
+      "frag": 3
+    },
+    {
+      "id": "F-048",
+      "type": "nfr",
+      "title": "Для типового пакета документов время обработки не должно превышать 30 минут.",
+      "status": "duplicate",
+      "confidence": 0.85,
+      "doc": "correspondence.md",
+      "frag": 4
+    }
+  ],
+  "pairs": [
+    {
+      "id": "P-1",
+      "kind": "duplicate",
+      "a": "F-005",
+      "b": "F-006",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-2",
+      "kind": "duplicate",
+      "a": "F-005",
+      "b": "F-048",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-3",
+      "kind": "duplicate",
+      "a": "F-006",
+      "b": "F-011",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-4",
+      "kind": "duplicate",
+      "a": "F-006",
+      "b": "F-016",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-5",
+      "kind": "duplicate",
+      "a": "F-006",
+      "b": "F-048",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-6",
+      "kind": "duplicate",
+      "a": "F-007",
+      "b": "F-044",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-7",
+      "kind": "contradiction",
+      "a": "F-009",
+      "b": "F-047",
+      "status": "open",
+      "reason": "указаны разные значения одного параметра"
+    },
+    {
+      "id": "P-8",
+      "kind": "duplicate",
+      "a": "F-010",
+      "b": "F-011",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-9",
+      "kind": "duplicate",
+      "a": "F-010",
+      "b": "F-024",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-10",
+      "kind": "duplicate",
+      "a": "F-011",
+      "b": "F-024",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-11",
+      "kind": "duplicate",
+      "a": "F-011",
+      "b": "F-048",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-12",
+      "kind": "duplicate",
+      "a": "F-012",
+      "b": "F-023",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-13",
+      "kind": "duplicate",
+      "a": "F-013",
+      "b": "F-048",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    },
+    {
+      "id": "P-14",
+      "kind": "duplicate",
+      "a": "F-015",
+      "b": "F-022",
+      "status": "open",
+      "reason": "совпадающий смысл формулировок"
+    }
+  ]
+}

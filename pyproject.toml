@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reqminer"
+version = "0.1.0"
+description = "Система автоматического извлечения и формализации требований"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2",
+    "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8",
+    "pytest-bdd>=7",
+    "fastapi>=0.115",
+    "markdown-it-py>=3",
+    "httpx>=0.27",
+]
+
+ui = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "markdown-it-py>=3",
+    "python-multipart>=0.0.9",
+]
+
+llm = [
+    "anthropic>=0.40",
+]
+
+db = [
+    "sqlmodel>=0.0.22",
+    "psycopg[binary]>=3.2",
+]
+
+graph = [
+    "neo4j>=5.28",
+]
+
+dev = [
+    "ruff>=0.6",
+    "mypy>=1.10",
+    "build>=1.2",
+]
+
+[tool.setuptools.packages.find]
+include = ["contracts*", "services*", "demo*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"services.builder" = [
+    "templates/manifest.toml",
+    "templates/documents/*.j2",
+    "templates/documents/functional_reqs/*.j2",
+    "templates/documents/non_functional_reqs/*.j2",
+    "templates/prompts/*.md",
+    "templates/prompts/*.j2",
+]
+
+"services.common" = [
+    "prompts/*.md",
+    "prompts/*.j2",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "db: приемочные сценарии на PostgreSQL (пропускаются без DATABASE_URL/БД)",
+    "graph: приемочные сценарии на Neo4j (пропускаются без NEO4J_URI/БД)",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.mypy]
+python_version = "3.12"
+explicit_package_bases = true
+mypy_path = "."
+ignore_missing_imports = true

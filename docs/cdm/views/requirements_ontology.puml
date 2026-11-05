@@ -1,0 +1,279 @@
+@startuml
+!include ../tools/dsl.puml
+
+'' [[../data_model_review.md#3.1. Requirement]]
+'' [[../data_model_review.md#3.2. FunctionalRequirement]]
+'' [[../data_model_review.md#3.3. NonFunctionalRequirement]]
+'' [[../data_model_review.md#3.15. Link]]
+'' [[../data_model_review.md#3.26. Constraint]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Абстрактные сущности
+''----------------------------------------------------------------------------------------------------------------------
+class Link <<abstract>> {
+    s("Абстрактная связь между требованиями")
+}
+
+class Requirement <<abstract>> {
+    s("Абстрактное требование, подлежащее управлению, проверке и трассировке")
+}
+
+class FunctionalRequirement <<abstract>> {
+    s("Функциональное требование: функциональность системы")
+}
+
+class NonFunctionalRequirement <<abstract>> {
+    s("Нефункциональное требование: качество, ограничение или техническое свойство")
+}
+
+class Constraint <<abstract>> {
+    s("Ограничение, сужающее пространство возможных решений")
+}
+
+'' [[../data_model_review.md#3.4. Epic]]
+'' [[../data_model_review.md#3.5. Feature]]
+'' [[../data_model_review.md#3.6. UserStory]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Функциональные требования
+''----------------------------------------------------------------------------------------------------------------------
+class Epic {
+    s("Крупное функциональное требование или бизнес-цель")
+}
+
+class Feature {
+    s("Функциональность, детализирующая Epic")
+}
+
+class UserStory {
+    s("Пользовательская история с ценностью для пользователя")
+}
+
+'' [[../data_model_review.md#3.7. QualityGoal]]
+'' [[../data_model_review.md#3.8. TechnicalStory]]
+'' [[../data_model_review.md#3.9. QualityAttribute]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Нефункциональные требования и качество
+''----------------------------------------------------------------------------------------------------------------------
+class QualityGoal {
+    s("Измеримая цель качества системы")
+}
+
+class TechnicalStory {
+    s("Техническая история или enabler")
+}
+
+class QualityAttribute {
+    s("Атрибут качества из выбранной модели качества")
+}
+
+'' [[../data_model_review.md#3.10. Criterion]]
+'' [[../data_model_review.md#3.11. AcceptanceCriterion]]
+'' [[../data_model_review.md#3.12. DefinitionOfDone]]
+'' [[../data_model_review.md#3.13. DoneCriterion]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Критерии приёма и готовности
+''----------------------------------------------------------------------------------------------------------------------
+class Criterion <<abstract>> {
+    s("Абстрактный критерий соответствия ожиданию")
+}
+
+class AcceptanceCriterion {
+    s("Критерий приёма требования")
+}
+
+class DefinitionOfDone {
+    s("Набор критериев готовности")
+}
+
+class DoneCriterion {
+    s("Конкретный пункт Definition of Done")
+}
+
+'' [[../data_model_review.md#3.16. Dependency]]
+'' [[../data_model_review.md#3.17. TraceabilityLink]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Связи между требованиями
+''----------------------------------------------------------------------------------------------------------------------
+class Dependency {
+    s("Зависимость планирования или реализации между требованиями")
+}
+
+class TraceabilityLink {
+    s("Трассируемая связь происхождения, реализации или проверки")
+}
+
+'' [[../data_model_review.md#3.14. Risk]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Риски
+''----------------------------------------------------------------------------------------------------------------------
+class Risk {
+    s("Риск, влияющий на требование, качество или поставку")
+}
+
+'' [[../data_model_review.md#3.18. SourceArtifact]]
+'' [[../data_model_review.md#3.19. DocumentChunk]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Источники и фрагменты документов
+''----------------------------------------------------------------------------------------------------------------------
+class SourceArtifact {
+    s("Исходный Markdown-документ")
+}
+
+class DocumentChunk {
+    s("Фрагмент Markdown-документа, подготовленный для LLM-анализа")
+}
+
+'' [[../data_model_review.md#3.20. ConfidenceAssessment]]
+''----------------------------------------------------------------------------------------------------------------------
+'' История уверенности
+''----------------------------------------------------------------------------------------------------------------------
+class ConfidenceAssessment {
+    s("Оценка коэффициента уверенности")
+}
+
+'' [[../data_model_review.md#3.21. DomainGlossary]]
+'' [[../data_model_review.md#3.22. GlossaryTerm]]
+'' [[../data_model_review.md#3.23. TermAlias]]
+'' [[../data_model_review.md#3.24. TermUsage]]
+'' [[../data_model_review.md#3.25. TermRelation]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Доменный глоссарий
+''----------------------------------------------------------------------------------------------------------------------
+class DomainGlossary {
+    s("Доменный глоссарий или его версия")
+}
+
+class GlossaryTerm {
+    s("Термин доменного глоссария")
+}
+
+class TermAlias {
+    s("Синоним или альтернативное написание термина")
+}
+
+class TermUsage {
+    s("Факт использования термина в тексте или требовании")
+}
+
+class TermRelation {
+    s("Отношение между терминами глоссария")
+}
+
+'' [[../data_model_review.md#3.27. BusinessConstraint]]
+'' [[../data_model_review.md#3.28. TechnicalConstraint]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Ограничения
+''----------------------------------------------------------------------------------------------------------------------
+class BusinessConstraint {
+    s("Бизнес-ограничение: регуляторное, бюджетное, сроковое")
+}
+
+class TechnicalConstraint {
+    s("Техническое ограничение: технология, протокол, платформа")
+}
+
+'' [[../data_model_review.md#4.1. Обобщения]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Наследование
+''----------------------------------------------------------------------------------------------------------------------
+FunctionalRequirement --|> Requirement
+NonFunctionalRequirement --|> Requirement
+
+Epic --|> FunctionalRequirement
+Feature --|> FunctionalRequirement
+UserStory --|> FunctionalRequirement
+
+QualityGoal --|> NonFunctionalRequirement
+TechnicalStory --|> NonFunctionalRequirement
+
+Dependency --|> Link
+TraceabilityLink --|> Link
+
+AcceptanceCriterion --|> Criterion
+DoneCriterion --|> Criterion
+
+BusinessConstraint --|> Constraint
+TechnicalConstraint --|> Constraint
+
+'' [[../data_model_review.md#4.2. Декомпозиция функциональных требований]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Агрегации и композиции
+''----------------------------------------------------------------------------------------------------------------------
+Epic "0..1" o-- "0..*" Feature : "groups"
+Feature "0..1" o-- "0..*" UserStory : "decomposesInto"
+
+'' [[../data_model_review.md#4.4. Критерии приёма и Definition of Done]]
+Requirement "1" *-- "0..*" AcceptanceCriterion : "has"
+
+'' [[../data_model_review.md#4.7. Источники и чанкинг]]
+Requirement "1" *-- "0..*" ConfidenceAssessment : "hasConfidence"
+
+'' [[../data_model_review.md#4.4. Критерии приёма и Definition of Done]]
+DefinitionOfDone "1" *-- "1..*" DoneCriterion : "contains"
+
+'' [[../data_model_review.md#4.7. Источники и чанкинг]]
+SourceArtifact "1" *-- "1..*" DocumentChunk : "consistsOf"
+
+'' [[../data_model_review.md#4.8. Доменный глоссарий]]
+DomainGlossary "1" *-- "0..*" GlossaryTerm : "contains"
+GlossaryTerm "1" *-- "0..*" TermAlias : "hasAlias"
+
+'' [[../data_model_review.md#4.6. Зависимости и трассируемость требований]]
+''----------------------------------------------------------------------------------------------------------------------
+'' Ассоциации
+''----------------------------------------------------------------------------------------------------------------------
+Link "0..*" --> "1" Requirement : "source"
+Link "0..*" --> "1" Requirement : "target"
+
+'' [[../data_model_review.md#4.4. Критерии приёма и Definition of Done]]
+Requirement "0..*" --> "0..*" DefinitionOfDone : "mustSatisfy"
+DefinitionOfDone "0..*" --> "0..*" QualityGoal : "enforces"
+
+'' [[../data_model_review.md#4.3. Качество и нефункциональные требования]]
+FunctionalRequirement "0..*" --> "0..*" QualityGoal : "constrainedBy"
+TechnicalStory "0..*" --> "0..*" FunctionalRequirement : "supports"
+
+QualityGoal "0..*" --> "1..*" QualityAttribute : "addresses"
+TechnicalStory "0..*" --> "0..*" QualityAttribute : "addresses"
+
+'' [[../data_model_review.md#4.5. Риски]]
+Risk "0..*" --> "0..*" Requirement : "affects"
+Risk "0..*" --> "0..*" QualityGoal : "threatens"
+Risk "0..*" --> "0..*" TechnicalStory : "mitigatedBy"
+
+'' [[../data_model_review.md#4.7. Источники и чанкинг]]
+DocumentChunk "1" --> "0..*" Requirement : "yields"
+DocumentChunk "1" --> "0..*" TermUsage : "yields"
+DocumentChunk "1" --> "0..*" Constraint : "yields"
+
+'' [[../data_model_review.md#4.8. Доменный глоссарий]]
+TermUsage "0..*" --> "0..1" GlossaryTerm : "refersTo"
+TermUsage "0..*" --> "0..1" FunctionalRequirement : "usedInRequirement"
+TermUsage "0..*" --> "0..1" Requirement : "foundInCandidate"
+TermUsage "0..*" --> "0..1" DocumentChunk : "extractedFrom"
+
+TermRelation "0..*" --> "1" GlossaryTerm : "sourceTerm"
+TermRelation "0..*" --> "1" GlossaryTerm : "targetTerm"
+
+'' [[../data_model_review.md#4.9. Ограничения]]
+Constraint "0..*" --> "0..*" Requirement : "constrains"
+Constraint "0..*" --> "0..*" QualityGoal : "constrains"
+Constraint "0..*" --> "0..*" Risk : "generates"
+Constraint "0..*" --> "0..*" TechnicalStory : "dictates"
+Constraint "0..*" --> "0..*" GlossaryTerm : "usesTerm"
+
+''----------------------------------------------------------------------------------------------------------------------
+'' Настройки представления
+''----------------------------------------------------------------------------------------------------------------------
+''hide @unlinked
+''hide TermRelation
+''hide DomainGlossary
+''hide TermAlias
+''hide Constraint
+''hide BusinessConstraint
+''hide TechnicalConstraint
+''hide Risk
+''hide TermUsage
+''hide GlossaryTerm
+
+Diagram("Онтологическая модель требований Scrum")
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+!include ../tools/dsl.puml
+
+Entity(Requirement, $description="Описание класса", $abstract=%true())
+
+Entity(FunctionalReq, $tags="FR")
+
+Entity(NonFunctionalReq, $tags="NFR")
+
+Generalization(FunctionalReq, Requirement)
+Generalization(NonFunctionalReq, Requirement)
+
+NonFunctionalReq -r-> FunctionalReq : s("Трассировка")
+
+@enduml

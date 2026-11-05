@@ -1,0 +1,392 @@
+@startuml
+class DependencyType <<enum>> {
+    '' Тип зависимости между требованиями.
+    UNSPECIFIED
+}
+
+class TraceabilityType <<enum>> {
+    '' Тип трассируемой связи.
+    UNSPECIFIED
+}
+
+class QualityAttrType <<enum>> {
+    '' Справочник категорий атрибутов модели качества.
+    UNSPECIFIED
+}
+
+class LifecycleStatus <<enum>> {
+    '' Статус жизненного цикла требования.
+    EXTRACTED
+    PENDING_REVIEW
+    CONFIRMED
+    DRAFT
+    APPROVED
+    IN_PROGRESS
+    DONE
+    REJECTED
+    DUPLICATE
+    NEEDS_CLARIFICATION
+    DEPRECATED
+}
+
+class ReviewDecision <<enum>> {
+    '' Решение эксперта по ручной проверке требования.
+    APPROVE
+    REJECT
+    NEEDS_CLARIFICATION
+    REWORK
+}
+
+class ConstraintCategory <<enum>> {
+    '' Категория ограничения.
+    REGULATORY
+    BUSINESS_RULE
+    TECHNOLOGY
+    ARCHITECTURE
+    SCHEDULE
+    BUDGET
+    INTERFACE
+    PHYSICAL
+}
+
+class StrictnessLevel <<enum>> {
+    '' Степень жёсткости ограничения.
+    HARD_MANDATORY
+    SOFT_PREFERRED
+    GUIDELINE
+}
+
+class ParsingStatus <<enum>> {
+    '' Статус парсинга Markdown-документа.
+    PENDING
+    PARSED
+    FAILED
+}
+
+class GlossaryTermStatus <<enum>> {
+    '' Статус термина глоссария.
+    DRAFT
+    REVIEWED
+    APPROVED
+    DEPRECATED
+}
+
+class TermUsageStatus <<enum>> {
+    '' Статус использования термина.
+    DETECTED
+    PENDING_REVIEW
+    CONFIRMED
+    REJECTED
+    NEEDS_CLARIFICATION
+}
+
+class TermRelationType <<enum>> {
+    '' Тип отношения между терминами глоссария.
+    SYNONYM
+    BROADER
+    NARROWER
+    RELATED
+    ANTONYM
+}
+
+class Requirement <<abstract>> {
+    '' Абстрактная сущность для любого требования/записи бэклога.
+    id : str
+    title : str
+    description : str
+    rationale : str
+    priority : str
+    source : str
+    estimate : str
+    is_mandatory : bool
+    confidence : float
+    origin : str
+    validated_at : datetime
+    raw_snippet : str
+    normalized_text : str
+    requirement_type : str
+    source_location : str
+    extracted_at : datetime
+    extraction_model : str
+    extraction_prompt : str
+    reviewed_by : str
+    review_comment : str
+    validation_notes : str
+}
+
+class FunctionalRequirement <<abstract>> {
+    '' Абстрактное функциональное требование.
+    business_value : str
+    scope : str
+}
+
+class NonFunctionalRequirement <<abstract>> {
+    '' Абстрактное требование к качеству, ограничению или техническому свойству.
+    verification_method : str
+    measurement_method : str
+}
+
+class Link <<abstract>> {
+    '' Абстрактная связь между требованиями.
+    description : str
+    rationale : str
+    status : str
+}
+
+class Constraint <<abstract>> {
+    '' Абстрактное ограничение, сужающее пространство решений.
+    id : str
+    name : str
+    description : str
+    rationale : str
+    penalty : str
+    confidence : float
+}
+
+class Epic {
+    '' Крупная функциональная цель или большая область работ.
+    objective : str
+    target_release : str
+    success_metric : str
+}
+
+class Feature {
+    '' Функциональность, детализирующая Epic.
+    benefit : str
+    target_iteration : str
+    acceptance_summary : str
+}
+
+class UserStory {
+    '' Пользовательская история с ценностью для пользователя.
+    as_a : str
+    i_want : str
+    so_that : str
+}
+
+class QualityGoal {
+    '' Измеримая цель качества системы.
+    metric_name : str
+    target_value : str
+    acceptable_threshold : str
+    monitoring_method : str
+}
+
+class TechnicalStory {
+    '' Техническая история для достижения целей качества.
+    technical_objective : str
+    implementation_approach : str
+}
+
+class Dependency {
+    '' Зависимость планирования или реализации между требованиями.
+    planning_impact : str
+}
+
+class TraceabilityLink {
+    '' Трассируемая связь происхождения, реализации или проверки.
+    direction : str
+    evidence : str
+}
+
+class Criterion <<abstract>> {
+    '' Абстрактный критерий (приёма или готовности).
+    id : str
+    description : str
+    verification_method : str
+    mandatory : bool
+}
+
+class AcceptanceCriterion {
+    '' Критерий приёма требования.
+    given_when_then : str
+    status : str
+    priority : str
+}
+
+class DoneCriterion {
+    '' Конкретный пункт Definition of Done.
+    applies_to : str
+    evidence : str
+}
+
+class DefinitionOfDone {
+    '' Набор критериев готовности.
+    id : str
+    name : str
+    scope : str
+    version : str
+    active : bool
+}
+
+class QualityAttribute {
+    '' Конкретный атрибут качества по выбранной модели качества.
+    id : str
+    code : str
+    name : str
+    description : str
+    model : str
+}
+
+class Risk {
+    '' Риск, влияющий на требования, качество или поставку.
+    id : str
+    description : str
+    category : str
+    probability : str
+    impact : str
+    severity : str
+    mitigation : str
+    contingency : str
+    owner : str
+    status : str
+}
+
+class ConfidenceAssessment {
+    '' Оценка коэффициента уверенности для требования.
+    id : str
+    value : float
+    method : str
+    assessed_at : datetime
+    assessor : str
+    rationale : str
+}
+
+class SourceArtifact {
+    '' Исходный Markdown-документ.
+    id : str
+    file_path : str
+    file_name : str
+    document_version : str
+    commit_hash : str
+    language : str
+    total_chunks : int
+}
+
+class DocumentChunk {
+    '' Фрагмент Markdown-документа, подготовленный для LLM-анализа.
+    id : str
+    chunk_index : int
+    content : str
+    token_count : int
+    start_offset : int
+    end_offset : int
+    markdown_path : str
+    overlap_size : int
+    content_hash : str
+    metadata_json : str
+}
+
+class DomainGlossary {
+    '' Доменный глоссарий или его версия.
+    id : str
+    name : str
+    description : str
+    version : str
+    language : str
+    status : str
+    owner : str
+}
+
+class GlossaryTerm {
+    '' Термин доменного глоссария.
+    id : str
+    canonical_name : str
+    definition : str
+    domain_area : str
+    language : str
+    source : str
+    is_preferred : bool
+}
+
+class TermAlias {
+    '' Синоним или альтернативное написание термина.
+    id : str
+    alias : str
+    language : str
+    usage_note : str
+    is_preferred : bool
+}
+
+class TermUsage {
+    '' Факт использования термина в тексте, кандидате или требовании.
+    id : str
+    matched_text : str
+    proposed_term : str
+    context_snippet : str
+    source_location : str
+    confidence : float
+    extraction_method : str
+    detected_at : datetime
+}
+
+class TermRelation {
+    '' Отношение между терминами глоссария.
+    id : str
+    note : str
+}
+
+class BusinessConstraint {
+    '' Бизнес-ограничение: регуляторное, бюджетное, сроковое.
+    regulation : str
+    standard : str
+    compliance_framework : str
+    budget_limit : float
+    deadline : date
+}
+
+class TechnicalConstraint {
+    '' Техническое ограничение: технология, протокол, платформа.
+    technology : str
+    protocol : str
+    architectural_pattern : str
+    vendor : str
+    platform : str
+}
+
+FunctionalRequirement --|> Requirement
+NonFunctionalRequirement --|> Requirement
+Epic --|> FunctionalRequirement
+Feature --|> FunctionalRequirement
+UserStory --|> FunctionalRequirement
+QualityGoal --|> NonFunctionalRequirement
+TechnicalStory --|> NonFunctionalRequirement
+Dependency --|> Link
+TraceabilityLink --|> Link
+AcceptanceCriterion --|> Criterion
+DoneCriterion --|> Criterion
+BusinessConstraint --|> Constraint
+TechnicalConstraint --|> Constraint
+Requirement "0..*" --> "0..*" DefinitionOfDone : "mustSatisfy"
+Requirement "1" *-- "0..*" AcceptanceCriterion : "has"
+Requirement "1" *-- "0..*" ConfidenceAssessment : "hasConfidence"
+FunctionalRequirement "0..*" --> "0..*" QualityGoal : "constrainedBy"
+Link "0..*" --> "1" Requirement : "source"
+Link "0..*" --> "1" Requirement : "target"
+Constraint "0..*" --> "0..*" Requirement : "constrains"
+Constraint "0..*" --> "0..*" QualityGoal : "constrains"
+Constraint "0..*" --> "0..*" Risk : "generates"
+Constraint "0..*" --> "0..*" TechnicalStory : "dictates"
+Constraint "0..*" --> "0..*" GlossaryTerm : "usesTerm"
+Epic "0..1" o-- "0..*" Feature : "groups"
+Feature "0..1" o-- "0..*" UserStory : "decomposesInto"
+QualityGoal "0..*" --> "1..*" QualityAttribute : "addresses"
+TechnicalStory "0..*" --> "0..*" QualityAttribute : "addresses"
+TechnicalStory "0..*" --> "0..*" FunctionalRequirement : "supports"
+DefinitionOfDone "1" *-- "1..*" DoneCriterion : "contains"
+DefinitionOfDone "0..*" --> "0..*" QualityGoal : "enforces"
+Risk "0..*" --> "0..*" Requirement : "affects"
+Risk "0..*" --> "0..*" QualityGoal : "threatens"
+Risk "0..*" --> "0..*" TechnicalStory : "mitigatedBy"
+SourceArtifact "1" *-- "1..*" DocumentChunk : "consistsOf"
+DocumentChunk "1" --> "0..*" Requirement : "yields"
+DocumentChunk "1" --> "0..*" TermUsage : "yields"
+DocumentChunk "1" --> "0..*" Constraint : "yields"
+DomainGlossary "1" *-- "0..*" GlossaryTerm : "contains"
+GlossaryTerm "1" *-- "0..*" TermAlias : "hasAlias"
+TermUsage "0..*" --> "0..1" GlossaryTerm : "refersTo"
+TermUsage "0..*" --> "0..1" FunctionalRequirement : "usedInRequirement"
+TermUsage "0..*" --> "0..1" Requirement : "foundInCandidate"
+TermRelation "0..*" --> "1" GlossaryTerm : "sourceTerm"
+TermRelation "0..*" --> "1" GlossaryTerm : "targetTerm"
+@enduml
