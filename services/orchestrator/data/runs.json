@@ -1,0 +1,44 @@
+{
+  "2026-042": {
+    "state": "done",
+    "started": "11.09.2026 14:02",
+    "finished": "11.09.2026 14:32",
+    "stages": [
+      {"service": "Ingestor", "mod": "нарезка и парсинг документов", "status": "done", "processed": "3 документа, 52 фрагмента"},
+      {"service": "Extractor", "mod": "извлечение и валидация фактов", "status": "done", "processed": "52 из 52 фрагментов, 47 фактов"},
+      {"service": "Extractor", "mod": "выявление противоречий", "status": "done", "processed": "2 пары-кандидата"},
+      {"service": "Builder", "mod": "формирование каркаса", "status": "done", "processed": "5 разделов каркаса"}
+    ],
+    "metrics": {"fragments": 52, "facts": 47, "llm_retries": 3, "quarantine": 1}
+  },
+  "2026-037": {
+    "state": "confirm",
+    "started": "10.09.2026 15:40",
+    "finished": "10.09.2026 16:05",
+    "stages": [
+      {"service": "Ingestor", "mod": "нарезка и парсинг документов", "status": "done", "processed": "5 документов, 71 фрагмент"},
+      {"service": "Extractor", "mod": "извлечение и валидация фактов", "status": "done", "processed": "71 из 71 фрагмента, 63 факта"},
+      {"service": "Extractor", "mod": "выявление противоречий", "status": "done", "processed": "3 пары-кандидата"},
+      {"service": "Builder", "mod": "формирование каркаса", "status": "wait", "processed": "—"}
+    ],
+    "metrics": {"fragments": 71, "facts": 63, "llm_retries": 5, "quarantine": 2}
+  },
+  "2026-031": {
+    "state": "run",
+    "started": "11.09.2026 14:10",
+    "stages": [
+      {"service": "Ingestor", "mod": "нарезка и парсинг документов", "status": "done", "processed": "2 документа, 24 фрагмента"},
+      {"service": "Extractor", "mod": "извлечение и валидация фактов", "status": "run", "processed": "11 из 24 фрагментов, 9 фактов"},
+      {"service": "Extractor", "mod": "выявление противоречий", "status": "wait", "processed": "—"},
+      {"service": "Builder", "mod": "формирование каркаса", "status": "wait", "processed": "—"}
+    ],
+    "metrics": {"fragments": 24, "facts": 9, "llm_retries": 1, "quarantine": 0}
+  },
+  "2026-025": {
+    "state": "rejected",
+    "reason": "недопустимый формат",
+    "started": "05.09.2026 09:41",
+    "stages": [],
+    "metrics": {"fragments": 0, "facts": 0, "llm_retries": 0, "quarantine": 0}
+  }
+}
